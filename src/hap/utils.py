@@ -1,7 +1,7 @@
 from src.hap.logger import logging
 from src.hap.exception import CustomException
-import yaml, sys
-
+import yaml, sys, os
+from src.hap.config.constants import *
 
 
 def read_yaml_file(file_path):
@@ -23,4 +23,14 @@ def read_yaml_file(file_path):
            logging.info("exception during occured at data ingestion stage")
            raise CustomException(e,sys) 
 
-read_yaml_file('config\config.yml')       
+#read_yaml_file(CONFIG_FILE_PATH)       
+
+def create_directories(path_:str):
+    """
+    Creates directories from path
+    """
+    try:
+        logging.info(f"creating directories for path: {path_}")    
+        os.makedirs(path_, exist_ok=True)
+    except Exception as e:
+        raise CustomException(e,sys) 

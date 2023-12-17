@@ -1,11 +1,11 @@
 import os
 import sys
-
 from src.hap.exception import CustomException
 from src.hap.logger import logging
 import pandas as pd
 from pymongo.mongo_client import MongoClient
-
+from src.hap.config.constants import *
+from src.hap.utils import create_directories,read_yaml_file
 
 def fetch_mongo(filepath):
     try: 
@@ -32,8 +32,10 @@ def fetch_mongo(filepath):
         return df
     
     except Exception as e:
-        print(e)
+        raise CustomException(e,sys)
 
-MONGOPATH = 'artifacts'
-fetch_mongo(MONGOPATH)
+mongopath = read_yaml_file(CONFIG_FILE_PATH)
+mongopath_ = mongopath.get('artifacts_root')
+create_directories(mongopath_)
+fetch_mongo(mongopath_)
         

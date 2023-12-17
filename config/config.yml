@@ -1,1 +1,9 @@
+name : 'Heart Attack Prediction'
+version: 1.0.0
+config_version: 1
+
+
 artifacts_root : artifacts
+
+data_ingestion: 
+  root_dir: artifacts/data_ingestion
