@@ -9,10 +9,12 @@ class Configuration_Creator:
         #print(self.config)
         #create_directories(self.config['data_ingestion']['root_dir'])
     def create_ingestion(self):
-        config = self.config['data_ingestion']['root_dir']
-        create_directories(config)
+        root_dir_ = self.config['data_ingestion']['root_dir']
+        raw_data_path_ = self.config['data_ingestion']['raw_data_path']
+        create_directories(root_dir_)
         data_ingestion_config = DataIngestionConfig(
-            root_dir=config
+            root_dir=root_dir_,
+            raw_data_path= raw_data_path_
         )
         #print(data_ingestion_config)
         return data_ingestion_config
