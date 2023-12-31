@@ -1,8 +1,10 @@
 from src.hap.config.constants import *
 from src.hap.utils import read_yaml_file, create_directories
-from src.hap.config.config_entity import DataIngestionConfig
+from src.hap.config.config_entity import DataIngestionConfig, DVCremote
+from src.hap.logger import logging
 
 class Configuration_Creator:
+    logging.info("Creating Configeration Creator")    
     def __init__(self):
         config_filepath = CONFIG_FILE_PATH
         self.config = read_yaml_file(config_filepath)
@@ -19,11 +21,20 @@ class Configuration_Creator:
         #print(data_ingestion_config)
         return data_ingestion_config
     
+    def create_remote(self):
+        remote_dir_  = self.config['dvc_remote']['remote_dir']
+        create_directories(remote_dir_)
+    
+        #print(remote_dir_)
+        return remote_dir_
+    
 if __name__=="__main__" :
        
     config_creator = Configuration_Creator()
 
     ingestion = config_creator.create_ingestion().root_dir
-    print(ingestion)
+    remote = config_creator.create_remote()
+    print(remote)
+ 
     
 

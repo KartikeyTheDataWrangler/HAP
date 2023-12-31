@@ -6,4 +6,7 @@ class DataIngestionConfig:
     root_dir: Path
     raw_data_path : Path
     
+@dataclass(frozen=True)
+class DVCremote:
+    remoe_dir: Path
 

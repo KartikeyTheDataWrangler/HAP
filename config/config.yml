@@ -9,3 +9,5 @@ data_ingestion:
   root_dir: artifacts/data_ingestion
   raw_data_path : artifacts/data_ingestion
 
+dvc_remote:
+  remote_dir: dvc remote

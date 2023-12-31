@@ -28,14 +28,17 @@ def fetch_mongo(filepath):
         
         df = pd.DataFrame(all_doc)
         df.to_csv(f'{filepath}/raw.csv')
-        
+        logging.info(f'pushed files from mongodb to directory:{filepath}')
         return df
     
     except Exception as e:
         raise CustomException(e,sys)
 
 mongopath = read_yaml_file(CONFIG_FILE_PATH)
-mongopath_ = mongopath.get('artifacts_root')
+mongopath_ = mongopath['data_ingestion']['raw_data_path']
 create_directories(mongopath_)
+mongopath2 = mongopath['dvc_remote']['remote_dir']
+create_directories(mongopath2)
 fetch_mongo(mongopath_)
+fetch_mongo(mongopath2)
         
