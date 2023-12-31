@@ -17,7 +17,7 @@ def read_yaml_file(file_path):
     try:
         with open(file_path, 'r') as file:
             data = yaml.safe_load(file)
-            print(data)
+            #print(data)
             return data
     except Exception as e:
            logging.info("exception during occured at data ingestion stage")

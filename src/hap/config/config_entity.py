@@ -8,5 +8,4 @@ class DataIngestionConfig:
     
 @dataclass(frozen=True)
 class DVCremote:
-    remoe_dir: Path
-
+    remote_dir: Path
