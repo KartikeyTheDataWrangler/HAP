@@ -45,11 +45,11 @@ class DataIngestion:
             train_set.to_csv(train_data_path)
             train_set.to_csv(dvc_remote_path)
             test_set.to_csv(test_data_path)
-        
+            return train_data_path, test_data_path
+
         except Exception as e:
             raise CustomException(e,sys)
 
-        return train_data_path, test_data_path
-
+        
 if __name__ =='__main__':
     di = DataIngestion().initiate_data_ingestion()
