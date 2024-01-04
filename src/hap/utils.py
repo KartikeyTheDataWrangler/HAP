@@ -23,7 +23,7 @@ def read_yaml_file(file_path):
            logging.info("exception during occured at data ingestion stage")
            raise CustomException(e,sys) 
 
-#read_yaml_file(CONFIG_FILE_PATH)       
+    
 
 def create_directories(path_:str):
     """
@@ -34,3 +34,4 @@ def create_directories(path_:str):
         os.makedirs(path_, exist_ok=True)
     except Exception as e:
         raise CustomException(e,sys) 
+    
