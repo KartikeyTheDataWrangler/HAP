@@ -1,6 +1,6 @@
 from src.hap.config.constants import *
 from src.hap.utils import read_yaml_file, create_directories
-from src.hap.config.config_entity import DataIngestionConfig, DVCremote
+from src.hap.config.config_entity import DataIngestionConfig
 from src.hap.logger import logging
 
 class Configuration_Creator:
@@ -27,6 +27,12 @@ class Configuration_Creator:
     
         #print(remote_dir_)
         return remote_dir_
+    
+    def create_preprocessor(self):
+        preprocessordir_ = self.config['preprocessor']['preprocessor_dir']
+        create_directories(preprocessordir_)
+        
+        return preprocessordir_
     
 if __name__=="__main__" :
        

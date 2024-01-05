@@ -11,3 +11,6 @@ data_ingestion:
 
 dvc_remote:
   remote_dir: dvc remote
+
+preprocessor:
+  preprocessor_dir : artifacts/models

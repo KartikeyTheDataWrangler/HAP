@@ -2,8 +2,6 @@ from src.hap.logger import logging
 from src.hap.exception import CustomException
 import os, sys
 from src.hap.config.constants import *
-from src.hap.utils import read_yaml_file, create_directories
-from src.hap.config.config_entity import DataIngestionConfig
 from src.hap.config.configeration import Configuration_Creator
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -11,7 +9,6 @@ from sklearn.model_selection import train_test_split
 
 root_dir = Configuration_Creator().create_ingestion().root_dir
 raw_data_path = Configuration_Creator().create_ingestion().raw_data_path
-
 dvc_remote = Configuration_Creator().create_remote()
 
 #csv = pd.read_csv(f'{raw_data_path}/raw.csv')
@@ -42,9 +39,9 @@ class DataIngestion:
             dvc_remote_path = os.path.join(dvc_remote,'train.csv')
             
             #lets put the files in required directories
-            train_set.to_csv(train_data_path)
-            train_set.to_csv(dvc_remote_path)
-            test_set.to_csv(test_data_path)
+            train_set.to_csv(train_data_path,index=False)
+            train_set.to_csv(dvc_remote_path,index=False)
+            test_set.to_csv(test_data_path,index=False)
             return train_data_path, test_data_path
 
         except Exception as e:
