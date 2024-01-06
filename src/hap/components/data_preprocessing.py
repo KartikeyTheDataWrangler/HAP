@@ -21,49 +21,53 @@ df = pd.read_csv(train_data_path)
 
 logging.info('Creating preprocessor 1 object')
 
+class Preprocessor:
+    def __init__(self):
+        # Define any dependencies or configuration parameters here
+        pass
 
-def get_preprocessor(df):
-    target = df['Heart Attack Risk'] 
-    # Assuming 'Blood Pressure' is the column name in the DataFrame
-    df['Blood Pressure'] = df['Blood Pressure'].apply(lambda x: str(x))  # Ensure values are converted to strings
-    df['Pressure List'] = df['Blood Pressure'].str.split('/')
-    
-    # Extract systolic and diastolic pressures and calculate pulse pressure
-    df['Systolic'] = df['Pressure List'].apply(lambda x: int(x[0]))
-    df['Diastolic'] = df['Pressure List'].apply(lambda x: int(x[1]))
-    df['Pulse Pressure'] = df['Systolic'] - df['Diastolic']
-    
-    # Categorize pulse pressure
-    df['Pulse Pressure Category'] = pd.cut(df['Pulse Pressure'], bins=[-float('inf'), 40, 80, 120, float('inf')],
-                                           labels=['extremely low', 'low', 'normal', 'high'], include_lowest=True)
-    
-    # Drop intermediate columns if needed
-    df = df.drop(['Pressure List', 'Systolic', 'Diastolic','Pulse Pressure','Heart Attack Risk','Blood Pressure','Patient ID','Country','Hemisphere','Income'], axis=1)
-    
-    df['diabetes'] = df['Diabetes'] + df['Smoking'] + df['Obesity']
-    
-    df = df.drop(['Diabetes','Smoking','Obesity'],axis=1)
-    
-    df['Exercise Hours Per Week'] = pd.cut(df['Exercise Hours Per Week'], 
-                                           bins=[0, 2, 4, 6, 8, 10, np.inf]
-                                           , labels=['very low', 'low', 'medium', 'high','very high','extreme' ])
-    
-    df['diabetes'] = pd.cut(df['diabetes'],3,labels=['normal','prediabetes','diabetes'])
-    
-    df['Triglycerides'] = pd.cut(df['Triglycerides'], bins=[0,150,200,np.inf], labels=['low', 'normal', 'high'])
-    
-    df = df.drop(columns=['Exercise Hours Per Week','Sedentary Hours Per Day','Heart Rate','Unnamed: 0','Unnamed: 0.1','_id'])
-    
-    df['Age'] = pd.cut(df['Age'], bins=[18,30,50,np.inf], labels=['young adult', 'adult', 'elderly'])
-    
-    df['BMI'] = pd.cut(df['BMI'], bins= [0,18,25,30,np.inf], labels=['under weight', 'healthy', 'overweight','obesity'])
-    
-    df = pd.concat([df,target],axis=1,join='inner')
-    return df
+    def get_preprocessor(self,df):
+        target = df['Heart Attack Risk'] 
+        # Assuming 'Blood Pressure' is the column name in the DataFrame
+        df['Blood Pressure'] = df['Blood Pressure'].apply(lambda x: str(x))  # Ensure values are converted to strings
+        df['Pressure List'] = df['Blood Pressure'].str.split('/')
+        
+        # Extract systolic and diastolic pressures and calculate pulse pressure
+        df['Systolic'] = df['Pressure List'].apply(lambda x: int(x[0]))
+        df['Diastolic'] = df['Pressure List'].apply(lambda x: int(x[1]))
+        df['Pulse Pressure'] = df['Systolic'] - df['Diastolic']
+        
+        # Categorize pulse pressure
+        df['Pulse Pressure Category'] = pd.cut(df['Pulse Pressure'], bins=[-float('inf'), 40, 80, 120, float('inf')],
+                                            labels=['extremely low', 'low', 'normal', 'high'], include_lowest=True)
+        
+        # Drop intermediate columns if needed
+        df = df.drop(['Pressure List', 'Systolic', 'Diastolic','Pulse Pressure','Heart Attack Risk','Blood Pressure','Patient ID','Country','Hemisphere','Income'], axis=1)
+        
+        df['diabetes'] = df['Diabetes'] + df['Smoking'] + df['Obesity']
+        
+        df = df.drop(['Diabetes','Smoking','Obesity'],axis=1)
+        
+        df['Exercise Hours Per Week'] = pd.cut(df['Exercise Hours Per Week'], 
+                                            bins=[0, 2, 4, 6, 8, 10, np.inf]
+                                            , labels=['very low', 'low', 'medium', 'high','very high','extreme' ])
+        
+        df['diabetes'] = pd.cut(df['diabetes'],3,labels=['normal','prediabetes','diabetes'])
+        
+        df['Triglycerides'] = pd.cut(df['Triglycerides'], bins=[0,150,200,np.inf], labels=['low', 'normal', 'high'])
+        
+        df = df.drop(columns=['Exercise Hours Per Week','Sedentary Hours Per Day','Heart Rate','Unnamed: 0','Unnamed: 0.1','_id'])
+        
+        df['Age'] = pd.cut(df['Age'], bins=[18,30,50,np.inf], labels=['young adult', 'adult', 'elderly'])
+        
+        df['BMI'] = pd.cut(df['BMI'], bins= [0,18,25,30,np.inf], labels=['under weight', 'healthy', 'overweight','obesity'])
+        
+        df = pd.concat([df,target],axis=1,join='inner')
+        return df
 
+preprocessor_instance = Preprocessor()
 
-
-save_object(file_path=preprocssor_path,obj=get_preprocessor)
+save_object(file_path=preprocssor_path,obj=preprocessor_instance)
 
 
 
@@ -72,6 +76,6 @@ if __name__ == '__main__':
     with open('artifacts\models\preprocessor.pkl', 'rb') as file:
         loaded_function = pickle.load(file)
     
-    result_df   =  loaded_function(df)
+    result_df   =  loaded_function.get_preprocessor(df)
     print(result_df)
     
