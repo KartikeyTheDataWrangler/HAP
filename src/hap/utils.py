@@ -2,7 +2,7 @@ from src.hap.logger import logging
 from src.hap.exception import CustomException
 import yaml, sys, os
 from src.hap.config.constants import *
-import pickle
+import dill
 
 
 def read_yaml_file(file_path):
@@ -43,7 +43,7 @@ def save_object(file_path, obj):
         os.makedirs(dir_path, exist_ok=True)
 
         with open(file_path, "wb") as file_obj:
-            pickle.dump(obj, file_obj)
+            dill.dump(obj, file_obj)
     
     except Exception as e:
         raise CustomException(e,sys)
@@ -54,7 +54,7 @@ def read_object(file_path):
         with open(file_path, "rb") as object:
     
             
-            return pickle.load(object)
+            return dill.load(object)
     except Exception as e:
         raise CustomException(e,sys)
         
