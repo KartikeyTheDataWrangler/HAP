@@ -20,7 +20,7 @@ class DataTransformationConfig:
         
     def DataTransformer(self):
         try:
-            encoder = OrdinalEncoder()
+            encoder = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=np.nan)
             
             num_col = ['Cholesterol','Family History ','Alcohol Consumption','Previous Heart Problems','Medication Use','Stress Level',
                        'Physical Activity Days Per Week','Sleep Hours Per Day']
@@ -33,7 +33,7 @@ class DataTransformationConfig:
             cat_pipeline = Pipeline(steps=[('encoder',encoder)])
             
             
-            transformer_obj = ColumnTransformer(
+            transformer_obj = ColumnTransformer(transformers=
                 [('cat_pipeline', cat_pipeline, cat_col)]
                 ,remainder='passthrough'
             )
@@ -62,12 +62,27 @@ if __name__ == '__main__':
     
     get_preprocessor = read_object(file_path=preprocessor_path)
     df_= get_preprocessor(df)
+    
     transformer = DataTransformationConfig().DataTransformer()
-    print(df_)
+    print(df_.dtypes)
     
     transformer.fit(df_)
-   
+    
     df_transformed = transformer.transform(df_)
     
     
+    extracted_encoder = transformer.named_transformers_['cat_pipeline'].named_steps['encoder']
+    cat_list = extracted_encoder.categories_
+    each_elm_encoding = {}
+    for cat in cat_list:
+        
+        cat_dict ={}
+        i=0
+        for elm in cat:
+            cat_dict[elm] =i
+            i+=1
+        each_elm_encoding[str(cat[0])]=cat_dict  
+    
+    print(each_elm_encoding)
+        
     print(df_transformed)
