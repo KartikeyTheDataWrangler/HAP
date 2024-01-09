@@ -9,7 +9,7 @@ from src.hap.logger import logging
 from src.hap.exception import CustomException
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
-
+from src.hap.utils import save_object
 
 preprocessor_dir = Configuration_Creator().create_preprocessor()
 transformer_path = os.path.join(preprocessor_dir, 'transformer')
@@ -39,50 +39,45 @@ class DataTransformationConfig:
             )
             transformer_obj.set_output(transform='pandas')
             
+            save_object(obj=transformer_obj, file_path=transformer_path)
             return transformer_obj
             
         except Exception as e:
             raise CustomException(e,sys)
-    
-    
-
-
-
-if __name__ == '__main__':
-    
-    raw_data_path = Configuration_Creator().create_ingestion().raw_data_path
-    preprocessor_dir = Configuration_Creator().create_preprocessor()
-    preprocessor_path = os.path.join(preprocessor_dir, 'preprocessor')
-    train_data_path = os.path.join(raw_data_path, 'train.csv')
-    train_cleaned_path = os.path.join(raw_data_path,'train_cleaned.csv')
-
-    
-   
-    df = pd.read_csv(train_data_path)
-    
-    get_preprocessor = read_object(file_path=preprocessor_path)
-    df_= get_preprocessor(df)
-    
-    transformer = DataTransformationConfig().DataTransformer()
-    
-    transformer.fit(df_)
-    
-    df_transformed = transformer.transform(df_)
-    
-    
-    extracted_encoder = transformer.named_transformers_['cat_pipeline'].named_steps['encoder']
-    cat_list = extracted_encoder.categories_
-   
-    
-    print(df_transformed)
-    
-    
-    print(cat_list)
-    print(df_transformed.columns[:len(cat_list)])
-    
-    
-    print(len(cat_list))
         
+    def get_categories(self,clean_df_path):
+        try:
+            self.transformer = DataTransformationConfig().DataTransformer()
+            self.df = clean_df_path
+            
+            self.transformer.fit(self.df)
+            df_transformed = self.transformer.transform(self.df)
+            
+            extracted_encoder = self.transformer.named_transformers_['cat_pipeline'].named_steps['encoder']
+            
+            cat_list = extracted_encoder.categories_    
+            encoding = {}
+            for i in range(len(cat_list)):
+                encoding[df_transformed.columns[i]] = cat_list[i]
+            
+            logging.info(f"the encodings of our transformer are : {encoding}")
+            return encoding
+        except Exception as e:
+            raise CustomException
+        
+        
+raw_data_path = Configuration_Creator().create_ingestion().raw_data_path
+train_cleaned_path = os.path.join(raw_data_path,'train_cleaned.csv')
+
+get_categories = DataTransformationConfig()
+
+cat = get_categories.get_categories(clean_df_path=pd.read_csv(train_cleaned_path))
+print(cat)
+        
+    
+    
+
+
         
         
         
