@@ -64,7 +64,6 @@ if __name__ == '__main__':
     df_= get_preprocessor(df)
     
     transformer = DataTransformationConfig().DataTransformer()
-    print(df_.dtypes)
     
     transformer.fit(df_)
     
@@ -73,16 +72,18 @@ if __name__ == '__main__':
     
     extracted_encoder = transformer.named_transformers_['cat_pipeline'].named_steps['encoder']
     cat_list = extracted_encoder.categories_
-    each_elm_encoding = {}
-    for cat in cat_list:
-        
-        cat_dict ={}
-        i=0
-        for elm in cat:
-            cat_dict[elm] =i
-            i+=1
-        each_elm_encoding[str(cat[0])]=cat_dict  
+   
     
-    print(each_elm_encoding)
-        
     print(df_transformed)
+    
+    
+    print(cat_list)
+    print(df_transformed.columns[:len(cat_list)])
+    
+    
+    print(len(cat_list))
+        
+        
+        
+        
+    
