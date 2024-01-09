@@ -60,10 +60,11 @@ class DataTransformationConfig:
             for i in range(len(cat_list)):
                 encoding[df_transformed.columns[i]] = cat_list[i]
             
-            logging.info(f"the encodings of our transformer are : {encoding}")
+            for k, v in encoding.items():
+                logging.info(f"the encodings of our transformer are col : {k}, encodings = {v}")
             return encoding
         except Exception as e:
-            raise CustomException
+            raise CustomException(e,sys)
         
         
 raw_data_path = Configuration_Creator().create_ingestion().raw_data_path
