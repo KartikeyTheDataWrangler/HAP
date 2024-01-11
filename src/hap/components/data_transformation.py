@@ -16,10 +16,13 @@ transformer_path = os.path.join(preprocessor_dir, 'transformer')
 
 class DataTransformationConfig:
     def __init__(self):
-        self.data_transformation_path = transformer_path
+        pass
         
-    def DataTransformer(self):
+    def DataTransformer(self,transformer_path,clean_df_path):
         try:
+            
+            self.data_transformation_path = transformer_path
+            self.clean_df = clean_df_path
             encoder = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=np.nan)
             
             num_col = ['Cholesterol','Family History ','Alcohol Consumption','Previous Heart Problems','Medication Use','Stress Level',
@@ -39,12 +42,26 @@ class DataTransformationConfig:
             )
             transformer_obj.set_output(transform='pandas')
             
-            save_object(obj=transformer_obj, file_path=transformer_path)
-            return transformer_obj
+            save_object(obj=transformer_obj, file_path=self.data_transformation_path)
+            
+            transformer_obj.fit(self.clean_df[:100])
+            df_transformed =  transformer_obj.transform(self.clean_df[:100])
+            
+            
+            extracted_encoder = transformer_obj.named_transformers_['cat_pipeline'].named_steps['encoder']
+            cat_list = extracted_encoder.categories_    
+            encoding = {}
+            for i in range(len(cat_list)):
+                encoding[df_transformed.columns[i]] = cat_list[i]
+            #print(encoding)
+            return transformer_obj, encoding
             
         except Exception as e:
             raise CustomException(e,sys)
-        
+    
+    
+'''
+    
     def get_categories(self,clean_df_path):
         try:
             self.transformer = DataTransformationConfig().DataTransformer()
@@ -65,21 +82,17 @@ class DataTransformationConfig:
             return encoding
         except Exception as e:
             raise CustomException(e,sys)
-        
+        '''
         
 raw_data_path = Configuration_Creator().create_ingestion().raw_data_path
 train_cleaned_path = os.path.join(raw_data_path,'train_cleaned.csv')
 
-get_categories = DataTransformationConfig()
+transformer = DataTransformationConfig()
 
-cat = get_categories.get_categories(clean_df_path=pd.read_csv(train_cleaned_path))
+_, cat = transformer.DataTransformer(transformer_path=transformer_path, clean_df_path=pd.read_csv(train_cleaned_path))
 print(cat)
-        
-    
-    
+#get_categories = DataTransformationConfig()
 
-
-        
-        
-        
+#cat = get_categories.get_categories(clean_df_path=pd.read_csv(train_cleaned_path))
+#print(cat)
     
