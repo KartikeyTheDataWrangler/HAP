@@ -53,7 +53,7 @@ class DataTransformationConfig:
             encoding = {}
             for i in range(len(cat_list)):
                 encoding[df_transformed.columns[i]] = cat_list[i]
-            #print(encoding)
+            logging.info(f"our transformed had made the following categories {encoding}")
             return transformer_obj, encoding
             
         except Exception as e:
