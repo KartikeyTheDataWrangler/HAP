@@ -42,6 +42,7 @@ class DataIngestion:
             train_set.to_csv(train_data_path,index=False)
             train_set.to_csv(dvc_remote_path,index=False)
             test_set.to_csv(test_data_path,index=False)
+            
             return train_data_path, test_data_path
 
         except Exception as e:

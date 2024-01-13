@@ -15,7 +15,7 @@ print(preprocessor_dir)
 #find a better way to deals with path in next project
 
 train_data_path = os.path.join(raw_data_path,'train.csv')
-#train_cleaned_data_path = os.path.join(raw_data_path,'train_cleaned.csv')
+train_cleaned_data_path = os.path.join(raw_data_path,'train_cleaned.csv')
 preprocssor_path = os.path.join(preprocessor_dir,'preprocessor')
 
 df = pd.read_csv(train_data_path)
@@ -55,7 +55,7 @@ def get_preprocessor(df):
     
     df = df.drop(columns=['Exercise Hours Per Week','Sedentary Hours Per Day','Heart Rate','Unnamed: 0','_id'])
     
-    df['Age'] = pd.cut(df['Age'], bins=[18,30,50,np.inf], labels=['young adult', 'adult', 'elderly'])
+    df['Age'] = pd.cut(df['Age'], bins=[0,30,50,np.inf], labels=['young adult', 'adult', 'elderly'])
     
     df['BMI'] = pd.cut(df['BMI'], bins= [0,18,25,30,np.inf], labels=['under weight', 'healthy', 'overweight','obesity'])
     
@@ -67,5 +67,6 @@ save_object(file_path=preprocssor_path,obj=get_preprocessor)
 
 if __name__ == '__main__':
     df_print = get_preprocessor(df=df)
-    print(df_print)
+    df_print.to_csv(train_cleaned_data_path)
+    print(df_print.isnull().sum())
 

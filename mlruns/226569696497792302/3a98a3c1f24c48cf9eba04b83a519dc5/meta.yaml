@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/kartikey/PYTHONPROJ/Personal_Projects/HAP2/mlruns/226569696497792302/3a98a3c1f24c48cf9eba04b83a519dc5/artifacts
+end_time: 1705170479736
+entry_point_name: ''
+experiment_id: '226569696497792302'
+lifecycle_stage: active
+run_id: 3a98a3c1f24c48cf9eba04b83a519dc5
+run_name: legendary-grouse-26
+run_uuid: 3a98a3c1f24c48cf9eba04b83a519dc5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1705170462572
+status: 3
+tags: []
+user_id: '91951'
