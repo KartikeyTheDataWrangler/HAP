@@ -89,10 +89,6 @@ train_cleaned_path = os.path.join(raw_data_path,'train_cleaned.csv')
 
 transformer = DataTransformationConfig()
 
-_, cat = transformer.DataTransformer(transformer_path=transformer_path, clean_df_path=pd.read_csv(train_cleaned_path))
+_, cat = transformer.DataTransformer(transformer_path=transformer_path, clean_df_path=pd.read_csv(train_cleaned_path,index_col=False))
 print(cat)
-#get_categories = DataTransformationConfig()
 
-#cat = get_categories.get_categories(clean_df_path=pd.read_csv(train_cleaned_path))
-#print(cat)
-    
