@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/kartikey/PYTHONPROJ/Personal_Projects/HAP2/mlruns/226569696497792302/4416cdf8363441599ad4533927922401/artifacts
+end_time: 1705206344549
+entry_point_name: ''
+experiment_id: '226569696497792302'
+lifecycle_stage: active
+run_id: 4416cdf8363441599ad4533927922401
+run_name: burly-doe-300
+run_uuid: 4416cdf8363441599ad4533927922401
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1705206327813
+status: 3
+tags: []
+user_id: '91951'

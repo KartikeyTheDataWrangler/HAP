@@ -22,7 +22,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score
 import mlflow
-
+import bentoml
 
 param_rf = {
    'n_estimators': [25,50],
@@ -47,17 +47,5 @@ with mlflow.start_run():
 
     mlflow.log_params(best_rf_params)
     mlflow.sklearn.log_model(best_model, "random-forest-best-model")
-    
-
-#df = mlflow.search_runs([rfc.experiment_id][0])
-
-run = mlflow.search_runs(
-    experiment_ids=rfc.experiment_id,
-    
-    max_results=10,
-)
-import bentoml
-best_run_id = run.run_id[0]
-
-model_uri = f"runs:/{best_run_id}/model"
+    new_model = bentoml.sklearn.save_model("best_model", best_model)
 
