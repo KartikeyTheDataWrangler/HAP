@@ -32,8 +32,8 @@ def mlflow_model_trainer(transformed_df_train):
         'criterion' :['gini', 'entropy'],
         }
 
-    X_train = transformed_df.drop('remainder__Heart Attack Risk',axis=1)
-    y_train = transformed_df['remainder__Heart Attack Risk']
+    X_train = transformed_df_train.drop('remainder__Heart Attack Risk',axis=1)
+    y_train = transformed_df_train['remainder__Heart Attack Risk']
 
 
     rfc = mlflow.set_experiment(experiment_name='my_rf_classifier')
@@ -55,8 +55,11 @@ def mlflow_model_trainer(transformed_df_train):
     return df
 
 
+
 if __name__ == "__main__":   
     df = mlflow_model_trainer(transformed_df_train=transformed_df) 
-    run_id = df.run_id[0]
+    print(df)
+    run_id = df.iloc[-1]["run_id"]
+    print(run_id)
     model = mlflow.sklearn.load_model("runs:/{}/random-forest-best-model".format(run_id))
 
