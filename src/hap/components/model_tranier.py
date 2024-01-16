@@ -5,6 +5,9 @@ from src.hap.config.configeration import Configuration_Creator
 from src.hap.utils import read_object, save_object
 import dill 
 from src.hap.logger import logging
+import dagshub
+
+
 preprocessor_dir = Configuration_Creator().create_preprocessor()
 transformer_path = os.path.join(preprocessor_dir, 'transformer')
 
@@ -23,6 +26,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score
 import mlflow
 import bentoml
+import dagshub
 
 def mlflow_model_trainer(transformed_df_train):
     param_rf = {
@@ -31,11 +35,21 @@ def mlflow_model_trainer(transformed_df_train):
     'min_samples_leaf': [ 6,8,10,12,15],
         'criterion' :['gini', 'entropy'],
         }
-
+    
     X_train = transformed_df_train.drop('remainder__Heart Attack Risk',axis=1)
     y_train = transformed_df_train['remainder__Heart Attack Risk']
+    
 
-
+    DAGSHUB_TOKEN = dagshub.auth.get_token()
+    DAGSHUB_USER = "c1bc62ffb769a24116050c71ba9a357691dd2366"
+    
+    
+    os.environ["MLFLOW_TRACKING_USERNAME"] = DAGSHUB_USER
+    os.environ["MLFLOW_TRACKING_PASSWORD"] = DAGSHUB_TOKEN
+    
+    
+    
+    mlflow.set_tracking_uri("https://dagshub.com/KartikeyTheDataWrangler/HAP.mlflow")
     rfc = mlflow.set_experiment(experiment_name='my_rf_classifier')
     with mlflow.start_run():
         

@@ -1,0 +1,4 @@
+MLFLOW_TRACKING_URI=https://dagshub.com/KartikeyTheDataWrangler/HAP.mlflow \
+MLFLOW_TRACKING_USERNAME=KartikeyTheDataWrangler \
+MLFLOW_TRACKING_PASSWORD=c1bc62ffb769a24116050c71ba9a357691dd2366 \
+python script.py
