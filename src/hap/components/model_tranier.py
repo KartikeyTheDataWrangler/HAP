@@ -27,6 +27,8 @@ from sklearn.metrics import accuracy_score
 import mlflow
 import bentoml
 import dagshub
+from dotenv import load_dotenv
+
 
 def mlflow_model_trainer(transformed_df_train):
     param_rf = {
@@ -41,7 +43,10 @@ def mlflow_model_trainer(transformed_df_train):
     
 
     DAGSHUB_TOKEN = dagshub.auth.get_token()
-    DAGSHUB_USER = "c1bc62ffb769a24116050c71ba9a357691dd2366"
+    load_dotenv(".env")
+    DAGS_USER = os.getenv('dags_user')
+    
+    DAGSHUB_USER = DAGS_USER
     
     
     os.environ["MLFLOW_TRACKING_USERNAME"] = DAGSHUB_USER

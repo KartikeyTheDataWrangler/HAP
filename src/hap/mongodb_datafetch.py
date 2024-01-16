@@ -6,13 +6,13 @@ import pandas as pd
 from pymongo.mongo_client import MongoClient
 from src.hap.config.constants import *
 from src.hap.utils import create_directories,read_yaml_file
-
+from dotenv import load_dotenv
 def fetch_mongo(filepath):
     try: 
         logging.info("Reading data from MongoDB")
-        #load_dotenv('.env')
-        #PASSWORD = os.getenv("password")
-        PASSWORD = 'osol2023'
+        load_dotenv('.env')
+        PASSWORD = os.getenv("password")
+       
         uri = f"mongodb+srv://for9cloud9deployment:{PASSWORD}@cluster0.m8xajrt.mongodb.net/?retryWrites=true&w=majority"
         # Create a new client and connect to the server
         client = MongoClient(uri)
