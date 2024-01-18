@@ -42,11 +42,10 @@ def mlflow_model_trainer(transformed_df_train):
     y_train = transformed_df_train['remainder__Heart Attack Risk']
     
 
-    DAGSHUB_TOKEN = dagshub.auth.get_token()
-    load_dotenv(".env")
-    DAGS_USER = os.getenv('dags_user')
     
-    DAGSHUB_USER = DAGS_USER
+    load_dotenv(".env")
+    DAGSHUB_USER = os.getenv('dags_user')
+    DAGSHUB_TOKEN = os.getenv('dags_pass')
     
     
     os.environ["MLFLOW_TRACKING_USERNAME"] = DAGSHUB_USER
