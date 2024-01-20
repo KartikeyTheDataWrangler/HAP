@@ -18,7 +18,7 @@ def fetch_mongo(filepath):
         client = MongoClient(uri)
         # Send a ping to confirm a successful connection
         client.admin.command('ping')
-        print("Pinged your deployment. You successfully connected to MongoDB!")
+        logging.info("Pinged your deployment. You successfully connected to MongoDB!")
 
         db = client['HDP2']
         curs = db.hdp2
