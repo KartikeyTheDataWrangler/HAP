@@ -3,6 +3,11 @@ stages:
     cmd: |
       python scripts/preprocess_step1.py data/raw_data.csv intermediate_data/step1_data.csv
       python scripts/preprocess_step2.py intermediate_data/step1_data.csv data/processed_data.csv
+
+    deps:
+      - code/featurization.py
+      - data/test_data.csv
+      - data/train_data.csv
     outs:
       - data/processed_data.csv
 
