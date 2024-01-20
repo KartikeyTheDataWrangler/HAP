@@ -10,7 +10,7 @@ import dill
 
 raw_data_path = Configuration_Creator().create_ingestion().raw_data_path
 preprocessor_dir = Configuration_Creator().create_preprocessor()
-print(preprocessor_dir)
+#print(preprocessor_dir)
 
 #find a better way to deals with path in next project
 
@@ -18,7 +18,7 @@ train_data_path = os.path.join(raw_data_path,'train.csv')
 train_cleaned_data_path = os.path.join(raw_data_path,'train_cleaned.csv')
 preprocssor_path = os.path.join(preprocessor_dir,'preprocessor')
 
-df = pd.read_csv(train_data_path)
+#df = pd.read_csv(train_data_path)
 #print(df)
 
 logging.info('Creating preprocessor 1 object')
@@ -62,7 +62,7 @@ def get_preprocessor(df):
     df = pd.concat([df,target],axis=1,join='inner')
     return df
 
-save_object(file_path=preprocssor_path,obj=get_preprocessor)
+#save_object(file_path=preprocssor_path,obj=get_preprocessor)
 
 
 if __name__ == '__main__':

@@ -41,7 +41,7 @@ def save_object(file_path, obj):
         dir_path = os.path.dirname(file_path)
 
         os.makedirs(dir_path, exist_ok=True)
-
+        logging.info(f"saving object {obj} in location {file_path}")
         with open(file_path, "wb") as file_obj:
             dill.dump(obj, file_obj)
     

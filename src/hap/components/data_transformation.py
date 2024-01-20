@@ -82,8 +82,8 @@ class DataTransformationConfig:
             return encoding
         except Exception as e:
             raise CustomException(e,sys)
-        '''
         
+  
 raw_data_path = Configuration_Creator().create_ingestion().raw_data_path
 train_cleaned_path = os.path.join(raw_data_path,'train_cleaned.csv')
 
@@ -92,3 +92,4 @@ transformer = DataTransformationConfig()
 _, cat = transformer.DataTransformer(transformer_path=transformer_path, clean_df_path=pd.read_csv(train_cleaned_path,index_col=False))
 print(cat)
 
+'''

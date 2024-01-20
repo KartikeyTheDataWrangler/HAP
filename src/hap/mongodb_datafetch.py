@@ -7,6 +7,7 @@ from pymongo.mongo_client import MongoClient
 from src.hap.config.constants import *
 from src.hap.utils import create_directories,read_yaml_file
 from dotenv import load_dotenv
+
 def fetch_mongo(filepath):
     try: 
         logging.info("Reading data from MongoDB")
@@ -33,7 +34,7 @@ def fetch_mongo(filepath):
     
     except Exception as e:
         raise CustomException(e,sys)
-
+'''
 mongopath = read_yaml_file(CONFIG_FILE_PATH)
 mongopath_ = mongopath['data_ingestion']['raw_data_path']
 create_directories(mongopath_)
@@ -41,4 +42,4 @@ mongopath2 = mongopath['dvc_remote']['remote_dir']
 create_directories(mongopath2)
 fetch_mongo(mongopath_)
 fetch_mongo(mongopath2)
-        
+        '''
