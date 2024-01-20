@@ -1,0 +1,9 @@
+stages:
+  stage1:
+    cmd: |
+      python scripts/preprocess_step1.py data/raw_data.csv intermediate_data/step1_data.csv
+      python scripts/preprocess_step2.py intermediate_data/step1_data.csv data/processed_data.csv
+    outs:
+      - data/processed_data.csv
+
+      
