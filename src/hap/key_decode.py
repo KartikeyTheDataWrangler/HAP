@@ -13,6 +13,7 @@ class key_decode:
     def decode_key(self,base64_str:str):
         decode_json = base64.b64decode(base64_str).decode('utf-8')
         dec_json = json.loads(decode_json)
+        
         #print(dec_json)
         with open('dvc remote/api_key.json', 'w') as f:
             json.dump(dec_json,fp=f)

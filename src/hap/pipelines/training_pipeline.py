@@ -79,8 +79,8 @@ os.chdir(directory)
 
 subprocess.run("dvc add train.csv raw.csv", shell=True)
 subprocess.run("dvc push", shell=True)
-
-logging.info("files pushed to gdrive remote")
+data_remote_url = "https://drive.google.com/drive/u/4/folders/1-6CgIVuN0D5jr4roIjaKG7-7ZAgXAXLF"
+logging.info(f"data pushed to gdrive remote: {data_remote_url}")
 os.chdir(root)
 key_decode().del_key()
 

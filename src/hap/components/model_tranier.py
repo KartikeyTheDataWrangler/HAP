@@ -51,9 +51,9 @@ def mlflow_model_trainer(transformed_df_train):
     os.environ["MLFLOW_TRACKING_USERNAME"] = DAGSHUB_USER
     os.environ["MLFLOW_TRACKING_PASSWORD"] = DAGSHUB_TOKEN
     
+    dagshub_url = "https://dagshub.com/KartikeyTheDataWrangler/HAP.mlflow"
     
-    
-    mlflow.set_tracking_uri("https://dagshub.com/KartikeyTheDataWrangler/HAP.mlflow")
+    mlflow.set_tracking_uri(dagshub_url)
     rfc = mlflow.set_experiment(experiment_name='my_rf_classifier')
     with mlflow.start_run():
         
@@ -68,6 +68,7 @@ def mlflow_model_trainer(transformed_df_train):
         mlflow.sklearn.log_model(best_model, "random-forest-best-model")
         new_model = bentoml.sklearn.save_model("best_model", best_model)
         print(new_model)
+        logging.info(f"Model Artifact Store : {dagshub_url}")
 
     df = mlflow.search_runs(experiment_names=["my_rf_classifier"])
     return df
