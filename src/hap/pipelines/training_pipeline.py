@@ -60,6 +60,7 @@ from src.hap.components.model_tranier import mlflow_model_trainer
 
 transformer = read_object(transformer_path)
 transformed_df = transformer.fit_transform(pd.read_csv(train_cleaned_data_csv))
+#transformed_df.to_csv('transformed_csv.csv')
 model_trainer = mlflow_model_trainer(transformed_df_train=transformed_df)
 
 logging.info(">>> STAGE 06 DVC-GDRIVE  <<<<<")
