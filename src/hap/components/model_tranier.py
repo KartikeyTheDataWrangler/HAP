@@ -63,6 +63,7 @@ def mlflow_model_trainer(transformed_df_train):
         best_rf_params = grid_search.best_params_
         logging.info(best_rf_params)
         best_model = grid_search.best_estimator_
+        save_object(file_path=preprocessor_dir+"/bestmodel",obj=best_model)
 
         mlflow.log_params(best_rf_params)
         mlflow.sklearn.log_model(best_model, "random-forest-best-model")
