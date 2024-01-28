@@ -53,20 +53,20 @@ h1 {
 
 <div class="container">
 
-<h1>Prediction Results</h1>
+<h1>Heart Attack Prediction Results</h1>
 
 <div class="result">
 
-<h2>For model: <b>{{ model }}</b></h2>
+<h2>After Analysing the data</h2>
 
-{% if prediction == "acceptable" %}
+{% if prediction == "patient has no risk of heart attack" %}
 
 
-<h2>Our car is <b>Acceptable</b></h2>
+<h2>Patient has <b>no risk of heart attack</b></h2>
 
 {% else %}
 
-<h2>Our car is <b>Unacceptable</b></h2>
+<h2>Patient is Predicted to have a risk of heart attack<b></b></h2>
 
 {% endif %}
 
