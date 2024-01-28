@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .card {
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .form-control {
+      border: none;
+      border-bottom: 1px solid #ddd;
+      border-radius: 0;
+      padding: .375rem 0;
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+      border-bottom: 2px solid #3f51b5;
+    }
+
+    .btn {
+      background-color: #3f51b5;
+      color: #fff;
+    }
+
+    .btn:hover {
+      background-color: #283593;
+    }
+
+    label {
+      color: #999;
+      font-weight: normal;
+    }
+
+    h1 {
+      color: #3f51b5;
+    }
+  </style>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <title>Heart Attack Predictor</title>
+</head>
+
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h1 class="text-center">Heart Attack Predictor</h1>
+
+            <form action="/" method="POST" class="mt-4">
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- First Column -->
+                  <div class="form-group">
+                    <label for="cat_age">Select Age</label>
+                    <select class="form-control" id="age" name="age">
+                      <option value="2">Young Adult</option>
+                      <option value="0">Adult</option>
+                      <option value="1">Elderly</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="cat_sex">Select Sex</label>
+                    <select class="form-control" id="sex" name="sex">
+                      <option value="0">Female</option>
+                      <option value="1">Male</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="cat_diet">Select Diet type</label>
+                    <select class="form-control" id="diet" name="diet">
+                      <option value="0">Average</option>
+                      <option value="1">Healthy</option>
+                      <option value="2">Unhealthy</option>         
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="cat_bmi">Select BMI</label>
+                    <select class="form-control" id="cat_bmi" name="cat_bmi">
+                      <option value="0">Healthy</option>
+                      <option value="1">Obese</option>
+                      <option value="2">Over Weight</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="rem_family_history">Family History</label>
+                    <select class="form-control" id="rem_family_history" name="rem_family_history">
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="rem_Alch_Consumption">Alchohol Consumption</label>
+                    <select class="form-control" id="rem_Alch_Consumption" name="rem_Alch_Consumption">
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="rem_heartproblems">Previous Heart Problems</label>
+                    <select class="form-control" id="rem_heartproblems" name="rem_heartproblems">
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+
+                </div>
+
+                <div class="col-md-6">
+                  <!-- Second Column -->
+                  <div class="form-group">
+                    <label for="cat_Triglycerides">Select level of Triglycerides</label>
+                    <select class="form-control" id="cat_Triglycerides" name="cat_Triglycerides">
+                      <option value="0">High</option>
+                      <option value="1">Low</option>
+                      <option value="2">Normal</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="continent">Select Continent You Live In</label>
+                    <select class="form-control" id="continent" name="continent">
+                      <option value="0">Africa</option>
+                      <option value="1">Asia</option>
+                      <option value="2">Australia</option>
+                      <option value="3">Europe</option>
+                      <option value="4">North America</option>
+                      <option value="5">South America</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="cat_Pulse">Select Pulse Pressure</label>
+                    <select class="form-control" id="cat_pulse" name="cat_pulse">
+                      <option value="0">Extremly Low</option>
+                      <option value="1">Low</option>
+                      <option value="2">Normal</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="cat_diabetes">Diabetes Range</label>
+                    <select class="form-control" id="cat_diabetes" name="cat_diabetes">
+                      <option value="0">Diabetes</option>
+                      <option value="1">Normal</option>
+                      <option value="2">Pre Diabetes</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="rem_medication">On Medication</label>
+                    <select class="form-control" id="rem_medication" name="rem_medication">
+                      <option value="0">No</option>
+                      <option value="1">Yes</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="rem_stress">Stress Level</label>
+                    <select class="form-control" id="rem_stress" name="rem_stress">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="rem_physical">Physical Activity Days Per Week</label>
+                    <select class="form-control" id="rem_physical" name="rem_physical">
+                      <option value="0">0</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="rem_sleephrs">Slepp Hours Per Day</label>
+                    <select class="form-control" id="rem_sleephrs" name="rem_sleephrs">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Predict</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

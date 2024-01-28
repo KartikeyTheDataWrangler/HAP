@@ -37,7 +37,7 @@ try:
     
     rf_model = read_object(preprocessor_dir + "/bestmodel")
     print(rf_model)
-    input_data = np.array([1,0,1,0,100,1,2,100,1,1,1,1,2,2,500,1]).reshape(1,-1)
+    input_data = np.array([1,0,1,0,100,1,2,100,1,1,1,100,2,2,500,1]).reshape(1,-1)
     print(input_data.shape)
    
     prediction = rf_model.predict(input_data)
